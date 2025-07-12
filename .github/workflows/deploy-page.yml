@@ -21,6 +21,7 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
+    # Single deploy job since we're just deploying
     deploy:
         environment:
             name: github-pages
@@ -29,29 +30,26 @@ jobs:
         steps:
             - name: Checkout
               uses: actions/checkout@v4
-
             - name: Set up Node
               uses: actions/setup-node@v4
               with:
                   node-version: lts/*
                   cache: "npm"
-
             - name: Install dependencies
-              run: npm ci
-              working-directory: ./web-app
-
+              run: |
+                  cd ./web-app
+                  npm ci
             - name: Build
-              run: npm run build
-              working-directory: ./web-app
-
+              run: |
+                  cd ./web-app
+                  npm run build
             - name: Setup Pages
               uses: actions/configure-pages@v5
-
             - name: Upload artifact
               uses: actions/upload-pages-artifact@v3
               with:
-                  path: "./web-app/dist" # Adjust path if build output is inside web-app
-
+                  # Upload dist folder
+                  path: "./dist"
             - name: Deploy to GitHub Pages
               id: deployment
               uses: actions/deploy-pages@v4
