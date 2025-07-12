@@ -35,6 +35,7 @@ jobs:
               with:
                   node-version: lts/*
                   cache: "npm"
+                  cache-dependency-path: ./web-app/package-lock.json
             - name: Install dependencies
               run: |
                   cd ./web-app
