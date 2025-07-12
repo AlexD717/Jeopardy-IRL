@@ -28,8 +28,6 @@ jobs:
             url: ${{ steps.deployment.outputs.page_url }}
         runs-on: ubuntu-latest
         steps:
-            - name: Open folder
-              run: cd ./web-app
             - name: Checkout
               uses: actions/checkout@v4
             - name: Set up Node
@@ -37,6 +35,8 @@ jobs:
               with:
                   node-version: lts/*
                   cache: "npm"
+            - name: Open folder
+              run: cd ./web-app
             - name: Install dependencies
               run: npm ci
             - name: Build
