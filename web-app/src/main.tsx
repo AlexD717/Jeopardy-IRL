@@ -5,7 +5,7 @@ import App from "./App.tsx"
 import { BrowserRouter } from "react-router-dom"
 
 const base =
-    import.meta.env.MODE === "production" ? "/Board-Game-Turn-Timer/" : "/"
+    import.meta.env.MODE === "production" ? "/Dont-Press-the-Button/" : "/"
 
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
