@@ -1,9 +1,14 @@
+import { ESPCommunicator } from "../systems/ESPCommunicator"
+
 const Setup = () => {
+    async function connectMasterESP() {
+        ESPCommunicator.getInstance().connectToESP()
+    }
+
     return (
         <div className="setup-container">
             <h1>Setup</h1>
-            <p>Setup functionality is not implemented yet.</p>
-            <p>Stay tuned for updates!</p>
+            <button onClick={connectMasterESP}>Connect MasterESP</button>
         </div>
     )
 }

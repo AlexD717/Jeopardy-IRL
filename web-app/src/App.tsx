@@ -2,8 +2,12 @@ import { Routes, Route } from "react-router-dom"
 import "./App.css"
 import Setup from "./pages/Setup"
 import Countdown from "./pages/Countdown"
+import { ToastContainer } from "react-toastify"
+import { useGameLoop } from "./systems/GameLoop"
 
 function App() {
+    useGameLoop()
+
     return (
         <div className="App">
             <Routes>
@@ -12,6 +16,7 @@ function App() {
                 <Route path="/setup" element={<Setup />} />
                 <Route path="/countdown" element={<Countdown />} />
             </Routes>
+            <ToastContainer />
         </div>
     )
 }

@@ -13,6 +13,8 @@ uint8_t followerMACs[][6] = {
 
 const int numFollowers = sizeof(followerMACs) / sizeof(followerMACs[0]);
 
+const int version = 1;
+
 typedef struct Message {
   char text[32];
 } Message;
@@ -57,7 +59,11 @@ void setup() {
 
   delay(1000);
 
-  Serial.println("MasterESP setup complete");
+  // Wait for connection to serial (web app)
+  while(!Serial) {
+    delay(100);
+  }
+  Serial.println("MasterESP Connected " + String(version));
 }
 
 void loop() {
