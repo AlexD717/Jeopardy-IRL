@@ -55,8 +55,9 @@ void setup() {
     }
   }
 
-  // Send message every 5 seconds
   delay(1000);
+
+  Serial.println("MasterESP setup complete");
 }
 
 void loop() {

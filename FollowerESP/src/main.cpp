@@ -41,6 +41,8 @@ void setup() {
   if (esp_now_add_peer(&peerInfo) != ESP_OK) {
     Serial.println("Failed to add master peer");
   }
+
+  Serial.println("Follower setup complete, waiting for messages...");
 }
 
 void loop() {
