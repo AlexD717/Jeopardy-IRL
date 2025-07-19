@@ -1,8 +1,12 @@
 #include <WiFi.h>
 #include <esp_now.h>
 
+// MAC address of the master CC:7B:5C:F6:58:14
+
 // Replace with MAC addresses of your followers
+// CC:7B:5C:FC:C0:38
 uint8_t followerMACs[][6] = {
+  {0xCC, 0x7B, 0x5C, 0xFC, 0xC0, 0x38},
   {0x24, 0x6F, 0x28, 0xAA, 0xBB, 0x01},
   {0x24, 0x6F, 0x28, 0xAA, 0xBB, 0x02}
 };
@@ -28,7 +32,7 @@ void OnDataRecv(const uint8_t *mac, const uint8_t *incomingData, int len) {
 }
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
   WiFi.mode(WIFI_STA);
   WiFi.disconnect();
 

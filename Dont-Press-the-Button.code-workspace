@@ -1,17 +1,21 @@
 {
     "folders": [
-		{
-			"name": "web-app",
-			"path": "web-app"
-		},
-		{
-			"name": "MasterESP",
-			"path": "MasterESP"
-		},
-		{
-			"name": "FollowerESP",
-			"path": "FollowerESP"
-		}
-	],
+        {
+            "name": "web-app",
+            "path": "web-app"
+        },
+        {
+            "name": "MasterESP",
+            "path": "MasterESP"
+        },
+        {
+            "name": "FollowerESP",
+            "path": "FollowerESP"
+        },
+        {
+            "name": "MacAddressESP",
+            "path": "MacAddressESP"
+        }
+    ],
     "settings": {}
 }
