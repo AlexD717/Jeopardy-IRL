@@ -1,8 +1,12 @@
 import { ESPCommunicator } from "../systems/ESPCommunicator"
+import { useNavigate } from "react-router-dom"
 
 const Setup = () => {
+    const navigate = useNavigate()
+
     async function connectMasterESP() {
-        ESPCommunicator.getInstance().connectToESP()
+        await ESPCommunicator.getInstance().connectToESP()
+        navigate("/countdown")
     }
 
     return (

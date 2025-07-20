@@ -6,8 +6,8 @@ export const useGameLoop = () => {
 
     useEffect(() => {
         const loop = (currentTime: number) => {
-            //const lastTime = lastTimeRef.current
-            //const deltaTime = (currentTime - lastTime) / 1000 // Convert to seconds
+            const lastTime = lastTimeRef.current
+            const deltaTime = (currentTime - lastTime) / 1000 // Convert to seconds
             lastTimeRef.current = currentTime
 
             ESPCommunicator.update()
