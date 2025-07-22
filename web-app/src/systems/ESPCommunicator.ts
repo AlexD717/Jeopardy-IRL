@@ -14,6 +14,15 @@ export class ESPCommunicator {
     public static getInstance(): ESPCommunicator {
         ESPCommunicator.instance ??= new ESPCommunicator()
         return ESPCommunicator.instance
+        }
+
+    private static processESPLine(input: string): void {
+        console.log("ESP Line:", input)
+        const acknowledge = "Message: Ready "
+        if (input.startsWith(acknowledge)) {
+            const espAddress = input.substring(acknowledge.length)
+            console.log("Follower ESP Address:", espAddress)
+        }
     }
 
     public static async update(): Promise<void> {
@@ -33,8 +42,7 @@ export class ESPCommunicator {
                 for (const line of lines) {
                     const clean = line.trim()
                     if (clean.length > 0) {
-                        console.log("ESP Line:", clean)
-                        // TODO: Pass this line to a handler / state store if needed
+                        ESPCommunicator.processESPLine(clean)
                     }
                 }
             }

@@ -1,6 +1,8 @@
 #include <WiFi.h>
 #include <esp_now.h>
 
+const int version = 1;
+
 typedef struct Message {
   char text[32];
 } Message;
@@ -15,10 +17,14 @@ void OnDataRecv(const uint8_t *mac, const uint8_t *incomingData, int len) {
   Serial.print("Received from master: ");
   Serial.println(msg.text);
 
-  // Respond
-  Message response;
-  strcpy(response.text, "Acknowledge from follower");
-  esp_now_send(mac, (uint8_t *)&response, sizeof(response));
+  String searchStr = "Searching for followers " + String(version);
+  if (strstr(msg.text, searchStr.c_str())) {
+    Message response;
+    String acknowledgeStr = "Ready " + String(WiFi.macAddress());
+    strncpy(response.text, acknowledgeStr.c_str(), sizeof(response.text) - 1);
+    response.text[sizeof(response.text) - 1] = '\0';  // Ensure null termination
+    esp_now_send(mac, (uint8_t *)&response, sizeof(response));
+  }
 }
 
 void setup() {

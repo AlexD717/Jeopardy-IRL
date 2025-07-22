@@ -6,7 +6,7 @@ const Setup = () => {
 
     async function connectMasterESP() {
         await ESPCommunicator.getInstance().connectToESP()
-        navigate("/countdown")
+        navigate("/search")
     }
 
     return (

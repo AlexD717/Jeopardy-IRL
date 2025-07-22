@@ -17,5 +17,10 @@
             "path": "MacAddressESP"
         }
     ],
-    "settings": {}
+    "settings": {
+        "files.associations": {
+            "xhash": "cpp",
+            "xtree": "cpp"
+        }
+    }
 }
