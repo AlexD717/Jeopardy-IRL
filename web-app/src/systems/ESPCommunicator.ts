@@ -1,4 +1,5 @@
 import { toast } from "react-toastify"
+import { ScoreTracker } from "./ScoreTracker"
 export class ESPCommunicator {
     private static readonly version = "1"
 
@@ -21,7 +22,7 @@ export class ESPCommunicator {
         const acknowledge = "Message: Ready "
         if (input.startsWith(acknowledge)) {
             const espAddress = input.substring(acknowledge.length)
-            console.log("Follower ESP Address:", espAddress)
+            ScoreTracker.getInstance().addPlayer(espAddress)
         }
     }
 
