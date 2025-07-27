@@ -8,13 +8,23 @@ const PlayerCustomizationCard = ({ playerId, name }: PlayerProperties) => {
     const [customizedName, setName] = useState(name)
 
     const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setName(event.target.value)
-        ScoreTracker.getInstance().updatePlayerName(playerId, event.target.value)
+        const newName = event.target.value
+        setName(newName)
+        if (newName.length === 0) return
+        if (newName.length > 15) return
+        if (ScoreTracker.getInstance().getPlayerData().find(player => player.name === newName.trimEnd())) {
+            console.warn("Name already taken, not updating")
+            return
+        }
+        ScoreTracker.getInstance().updatePlayerName(
+            playerId,
+            newName.trimEnd()
+        )
     }
 
     return (
         <div className="player-customization-card">
-            <h2>{customizedName}</h2>
+            <h2>{name}</h2>
             <div className="horizontal-flex">
                 <p style={{ marginRight: "0.5rem" }}>Name:</p>
                 <input type="text" value={customizedName} onChange={handleNameChange} />
