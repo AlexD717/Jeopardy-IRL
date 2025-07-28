@@ -11,7 +11,7 @@ DeviceState deviceState = CONNECTING;
 
 // MAC address of the master CC:7B:5C:F6:58:14
 
-// Replace with MAC addresses of your followers
+// TODO replace with MAC addresses of your followers
 // CC:7B:5C:FC:C0:38
 // 28:56:2F:4A:74:FC
 uint8_t followerMACs[][6] = {
