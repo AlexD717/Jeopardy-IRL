@@ -80,6 +80,7 @@ void loop() {
   Message msg;
   switch (deviceState) {
     case SEARCHING: {
+      // Find follower ESPs
       Serial.println("Searching for followers...");
         String searchStr = "Searching for followers " + String(version);
         strncpy(msg.text, searchStr.c_str(), sizeof(msg.text) - 1);
@@ -96,6 +97,17 @@ void loop() {
           }
         }
         delay(1000);
+      }
+
+      // Check for data from web-app
+      if (Serial.available()) {
+        String input = Serial.readStringUntil('\n');
+        if (input == "Game Start") {
+          deviceState = IN_GAME;
+          Serial.println("Starting game mode...");
+        } else {
+          Serial.println("Unknown command: " + input);
+        }
       }
       break;
 

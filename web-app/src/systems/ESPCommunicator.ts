@@ -6,6 +6,7 @@ export class ESPCommunicator {
     private static instance: ESPCommunicator | null = null
     private esp: any | null = null
     private reader: ReadableStreamDefaultReader<string> | null = null
+    private writer: WritableStreamDefaultWriter<string> | null = null
     private buffer: string = ""
 
     private constructor() {
@@ -58,6 +59,7 @@ export class ESPCommunicator {
                 if (!this.esp) return
                 this.esp = null
                 this.reader = null
+                this.writer = null
                 this.buffer = ""
                 console.log("ESP Disconnected:", event);
                 toast.error("ESP Disconnected", {
@@ -86,6 +88,26 @@ export class ESPCommunicator {
         return line.trim() // Return what we have, even if incomplete
     }
 
+    async sendMessage(message: string): Promise<void> {
+        if (!this.writer) {
+            console.error("ESP not connected or writer not initialized.")
+            return
+        }
+        
+        try {
+            await this.writer.write(message + "\n")
+            console.log("Sent message:", message)
+        } catch (error) {
+            console.error("Error sending message to ESP:", error)
+            toast.error("Failed to send message to ESP", {
+                position: "bottom-right",
+                autoClose: 5000,
+                theme: "dark",
+            })
+        }
+
+    }
+
     async connectToESP(): Promise<void> {
         console.log("Connecting to MASTER ESP...")
         if (!("serial" in navigator)) {
@@ -106,10 +128,16 @@ export class ESPCommunicator {
             // Open a connection
             await connectingDevice.open({ baudRate: 9600 })
 
+            // Setup reader
             const textDecoder = new TextDecoderStream()
             connectingDevice.readable.pipeTo(textDecoder.writable)
             this.reader = textDecoder.readable.getReader()
-            
+
+            // Setup writer
+            const textEncoder = new TextEncoderStream()
+            this.writer = textEncoder.writable.getWriter()
+            textEncoder.readable.pipeTo(connectingDevice.writable)
+
             const received = await this.readLine(this.reader)
             console.log("Received:", received)
 

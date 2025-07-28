@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { ScoreTracker } from "../systems/ScoreTracker"
 import type { PlayerProperties } from "../systems/ScoreTracker"
 import "./Search.css"
+import { ESPCommunicator } from "../systems/ESPCommunicator"
 
 const PlayerCustomizationCard = ({ playerId, name }: PlayerProperties) => {
     const [customizedName, setName] = useState(name)
@@ -53,6 +54,7 @@ const Search = () => {
     }, [])
 
     function startGame() {
+        ESPCommunicator.getInstance().sendMessage("Game Start")
         navigate("/countdown")
     }
 
