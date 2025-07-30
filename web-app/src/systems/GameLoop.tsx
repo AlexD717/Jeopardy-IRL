@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react"
 import { ESPCommunicator } from "./ESPCommunicator"
+import { CountdownSystem } from "./CountdownSystem"
 
 export const useGameLoop = () => {
     const lastTimeRef = useRef(performance.now())
@@ -11,6 +12,7 @@ export const useGameLoop = () => {
             lastTimeRef.current = currentTime
 
             ESPCommunicator.update()
+            CountdownSystem.getInstance().update(deltaTime)
 
             requestAnimationFrame(loop)
         }
