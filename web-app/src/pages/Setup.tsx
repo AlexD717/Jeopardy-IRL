@@ -2,19 +2,19 @@ import { ESPCommunicator } from "../systems/ESPCommunicator"
 import { useNavigate } from "react-router-dom"
 
 const Setup = () => {
-    const navigate = useNavigate()
+  const navigate = useNavigate()
 
-    async function connectMasterESP() {
-        await ESPCommunicator.getInstance().connectToESP()
-        navigate("/search")
-    }
+  async function connectMasterESP() {
+    await ESPCommunicator.getInstance().connectToESP()
+    navigate("/search")
+  }
 
-    return (
-        <div className="setup-container">
-            <h1>Setup</h1>
-            <button onClick={connectMasterESP}>Connect MasterESP</button>
-        </div>
-    )
+  return (
+    <div className="setup-container">
+      <h1>Setup</h1>
+      <button onClick={connectMasterESP}>Connect MasterESP</button>
+    </div>
+  )
 }
 
 export default Setup
