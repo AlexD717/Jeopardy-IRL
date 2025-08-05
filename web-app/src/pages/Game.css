@@ -32,6 +32,7 @@ body {
   text-align: center;
   font-weight: bold;
   margin-bottom: 0.5rem;
+  user-select: none;
 }
 
 .question-tile {
@@ -47,6 +48,7 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 2vw;
+  user-select: none;
 }
 
 .question-tile.disabled {

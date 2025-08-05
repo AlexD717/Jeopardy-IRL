@@ -21,6 +21,9 @@
         "files.associations": {
             "xhash": "cpp",
             "xtree": "cpp"
-        }
+        },
+        "cSpell.words": [
+            "gamehost"
+        ]
     }
 }

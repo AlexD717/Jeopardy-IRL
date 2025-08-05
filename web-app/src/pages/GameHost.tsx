@@ -5,12 +5,12 @@ import QuestionModal from "../components/QuestionModal"
 import type { Category, Question } from "../types"
 import { sampleCategories } from "../systems/Data"
 
-const Game = () => {
+const GameHost = () => {
   const [categories, setCategories] = useState<Category[]>(sampleCategories)
   const [activeQuestion, setActiveQuestion] = useState<Question | null>(null)
 
   const handleQuestionClick = (question: Question) => {
-    console.log("Press question on host screen", question)
+    setActiveQuestion(question)
   }
 
   const closeModal = () => {
@@ -33,4 +33,4 @@ const Game = () => {
   )
 }
 
-export default Game
+export default GameHost

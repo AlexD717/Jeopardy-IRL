@@ -56,7 +56,8 @@ const Search = () => {
 
   function startGame() {
     ESPCommunicator.getInstance().sendMessage("Game Start")
-    navigate("/countdown")
+    window.open("/game", "_blank")
+    navigate("/gamehost")
   }
 
   return (
