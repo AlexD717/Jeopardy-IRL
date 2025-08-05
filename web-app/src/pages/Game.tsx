@@ -1,4 +1,5 @@
 import "./Game.css"
+import React from "react"
 import { useState } from "react"
 import GameBoard from "../components/GameBoard"
 import QuestionModal from "../components/QuestionModal"
@@ -8,6 +9,21 @@ import { sampleCategories } from "../systems/Data"
 const Game = () => {
   const [categories, setCategories] = useState<Category[]>(sampleCategories)
   const [activeQuestion, setActiveQuestion] = useState<Question | null>(null)
+
+  React.useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      if (event.origin !== window.location.origin) return
+      const { type, question } = event.data
+      if (type === "openQuestion" && question) {
+        setActiveQuestion(question)
+      }
+    }
+
+    window.addEventListener("message", handleMessage)
+    return () => {
+      window.removeEventListener("message", handleMessage)
+    }
+  }, [])
 
   const handleQuestionClick = (question: Question) => {
     console.log("Press question on host screen", question)

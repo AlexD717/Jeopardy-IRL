@@ -4,6 +4,7 @@ import GameBoard from "../components/GameBoard"
 import QuestionModal from "../components/QuestionModal"
 import type { Category, Question } from "../types"
 import { sampleCategories } from "../systems/Data"
+import { PageCommunicator } from "../systems/PageCommunicator"
 
 const GameHost = () => {
   const [categories, setCategories] = useState<Category[]>(sampleCategories)
@@ -11,6 +12,7 @@ const GameHost = () => {
 
   const handleQuestionClick = (question: Question) => {
     setActiveQuestion(question)
+    PageCommunicator.gameHostPage?.postMessage({ type: "openQuestion", question: question }, window.location.origin)
   }
 
   const closeModal = () => {

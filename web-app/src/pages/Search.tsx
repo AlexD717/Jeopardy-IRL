@@ -4,6 +4,7 @@ import { ScoreTracker } from "../systems/ScoreTracker"
 import type { PlayerProperties } from "../systems/ScoreTracker"
 import "./Search.css"
 import { ESPCommunicator } from "../systems/ESPCommunicator"
+import { PageCommunicator } from "../systems/PageCommunicator"
 
 const PlayerCustomizationCard = ({ playerId, name }: PlayerProperties) => {
   const [customizedName, setName] = useState(name)
@@ -57,7 +58,7 @@ const Search = () => {
   function startGame() {
     ESPCommunicator.getInstance().sendMessage("Game Start")
     const gameURL = import.meta.env.MODE === "production" ? "/Jeopardy-IRL/game" : "/game"
-    window.open(gameURL, "_blank")
+    PageCommunicator.gameHostPage = window.open(gameURL, "_blank")
     navigate("/gamehost")
   }
 
