@@ -56,7 +56,8 @@ const Search = () => {
 
   function startGame() {
     ESPCommunicator.getInstance().sendMessage("Game Start")
-    window.open("/game", "_blank")
+    const gameURL = import.meta.env.MODE === "production" ? "/Jeopardy-IRL/game" : "/game"
+    window.open(gameURL, "_blank")
     navigate("/gamehost")
   }
 
