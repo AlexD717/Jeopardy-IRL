@@ -1,14 +1,22 @@
 #include <WiFi.h>
 #include <esp_now.h>
 
+enum DeviceState {
+  CONNECTING,
+  SEARCHING,
+  IN_GAME,
+};
+
+DeviceState deviceState = CONNECTING;
+
 // MAC address of the master CC:7B:5C:F6:58:14
 
-// Replace with MAC addresses of your followers
+// TODO replace with MAC addresses of your followers
 // CC:7B:5C:FC:C0:38
+// 28:56:2F:4A:74:FC
 uint8_t followerMACs[][6] = {
   {0xCC, 0x7B, 0x5C, 0xFC, 0xC0, 0x38},
-  {0x24, 0x6F, 0x28, 0xAA, 0xBB, 0x01},
-  {0x24, 0x6F, 0x28, 0xAA, 0xBB, 0x02}
+  {0x28, 0x56, 0x2F, 0x4A, 0x74, 0xFC},
 };
 
 const int numFollowers = sizeof(followerMACs) / sizeof(followerMACs[0]);
@@ -57,29 +65,55 @@ void setup() {
     }
   }
 
-  delay(1000);
+  delay(250);
 
   // Wait for connection to serial (web app)
   while(!Serial) {
     delay(100);
   }
   Serial.println("MasterESP Connected " + String(version));
+  delay(1000);
+  deviceState = SEARCHING;
 }
 
 void loop() {
   Message msg;
-  strcpy(msg.text, "Hello followers!");
+  switch (deviceState) {
+    case SEARCHING: {
+      // Find follower ESPs
+      Serial.println("Searching for followers...");
+        String searchStr = "Searching for followers " + String(version);
+        strncpy(msg.text, searchStr.c_str(), sizeof(msg.text) - 1);
+        msg.text[sizeof(msg.text) - 1] = '\0';  // Ensure null termination
 
-  for (int i = 0; i < numFollowers; i++) {
-    esp_err_t result = esp_now_send(followerMACs[i], (uint8_t *)&msg, sizeof(msg));
-    if (result == ESP_OK) {
-      Serial.print("Sent to follower ");
-      Serial.println(i);
-    } else {
-      Serial.print("Failed to send to follower ");
-      Serial.println(i);
-    }
+        for (int i = 0; i < numFollowers; i++) {
+          esp_err_t result = esp_now_send(followerMACs[i], (uint8_t *)&msg, sizeof(msg));
+          if (result == ESP_OK) {
+            Serial.print("Sent to follower ");
+            Serial.println(i);
+          } else {
+            Serial.print("Failed to send to follower ");
+            Serial.println(i);
+          }
+        }
+        delay(1000);
+      }
+
+      // Check for data from web-app
+      if (Serial.available()) {
+        String input = Serial.readStringUntil('\n');
+        if (input == "Game Start") {
+          deviceState = IN_GAME;
+          Serial.println("Starting game mode...");
+        } else {
+          Serial.println("Unknown command: " + input);
+        }
+      }
+      break;
+
+    case IN_GAME:
+      Serial.println("In game mode...");
+      delay(5000);
+      break;
   }
-
-  delay(5000);
 }

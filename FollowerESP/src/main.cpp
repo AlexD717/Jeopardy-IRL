@@ -1,12 +1,16 @@
 #include <WiFi.h>
 #include <esp_now.h>
 
+const int version = 1;
+const int buttonPin = 32; // TODO change to your button pin
+bool lastButtonState = HIGH;
+
 typedef struct Message {
   char text[32];
 } Message;
 
 // MAC address of the master CC:7B:5C:F6:58:14
-uint8_t masterMAC[] = {0xCC, 0x7B, 0x5C, 0xF6, 0x58, 0x14};
+uint8_t masterMAC[] = {0xCC, 0x7B, 0x5C, 0xF6, 0x58, 0x14}; // TODO change to your master MAC address
 
 void OnDataRecv(const uint8_t *mac, const uint8_t *incomingData, int len) {
   Message msg;
@@ -15,14 +19,23 @@ void OnDataRecv(const uint8_t *mac, const uint8_t *incomingData, int len) {
   Serial.print("Received from master: ");
   Serial.println(msg.text);
 
-  // Respond
-  Message response;
-  strcpy(response.text, "Acknowledge from follower");
-  esp_now_send(mac, (uint8_t *)&response, sizeof(response));
+  String searchStr = "Searching for followers " + String(version);
+  if (strstr(msg.text, searchStr.c_str())) {
+    Message response;
+    String acknowledgeStr = "Ready " + String(WiFi.macAddress());
+    strncpy(response.text, acknowledgeStr.c_str(), sizeof(response.text) - 1);
+    response.text[sizeof(response.text) - 1] = '\0';  // Ensure null termination
+    esp_now_send(mac, (uint8_t *)&response, sizeof(response));
+  }
 }
 
 void setup() {
   Serial.begin(9600);
+
+  // Pin setup
+  pinMode(buttonPin, INPUT_PULLUP);
+
+  // ESP-NOW setup
   WiFi.mode(WIFI_STA);
   WiFi.disconnect();
 
@@ -46,5 +59,15 @@ void setup() {
 }
 
 void loop() {
-  delay(1000); // Idle, all work done in callback
+  int currentButtonState = digitalRead(buttonPin);
+  if (currentButtonState == LOW && lastButtonState == HIGH) {
+    Serial.println("Button pressed, sending message to master...");
+    Message msg;
+    String acknowledgeStr = "Button Press " + String(WiFi.macAddress());
+    strncpy(msg.text, acknowledgeStr.c_str(), sizeof(msg.text) - 1);
+    msg.text[sizeof(msg.text) - 1] = '\0';
+    esp_now_send(masterMAC, (uint8_t *)&msg, sizeof(msg));
+  }
+  lastButtonState = currentButtonState;
+  delay(10);
 }
