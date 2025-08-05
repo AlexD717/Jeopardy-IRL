@@ -43,10 +43,14 @@ body {
   border: 1px solid #ffffff55;
   min-width: 12vw;
   min-height: 3vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2vw;
 }
 
 .question-tile.disabled {
-  background: #333;
+  background: #1f1f1f;
   cursor: not-allowed;
 }
 
