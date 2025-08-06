@@ -14,8 +14,21 @@ const Game = () => {
     const handleMessage = (event: MessageEvent) => {
       if (event.origin !== window.location.origin) return
       const { type, question } = event.data
+
       if (type === "openQuestion" && question) {
         setActiveQuestion(question)
+        return
+      }
+
+      if (type === "closeQuestion" && question) {
+        setActiveQuestion(null)
+        setCategories((prev) =>
+          prev.map((cat) => ({
+            ...cat,
+            questions: cat.questions.map((q) => (q.id === question.id ? { ...q, asked: true } : q)),
+          }))
+        )
+        return
       }
     }
 
@@ -29,22 +42,10 @@ const Game = () => {
     console.log("Press question on host screen", question)
   }
 
-  const closeModal = () => {
-    if (activeQuestion) {
-      setCategories((prev) =>
-        prev.map((cat) => ({
-          ...cat,
-          questions: cat.questions.map((q) => (q.id === activeQuestion.id ? { ...q, asked: true } : q)),
-        }))
-      )
-    }
-    setActiveQuestion(null)
-  }
-
   return (
     <div className="app-container">
       <GameBoard categories={categories} onQuestionClick={handleQuestionClick} />
-      <QuestionModal question={activeQuestion} onClose={closeModal} />
+      <QuestionModal question={activeQuestion} />
     </div>
   )
 }

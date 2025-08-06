@@ -1,7 +1,7 @@
 import "./Game.css"
 import { useState } from "react"
 import GameBoard from "../components/GameBoard"
-import QuestionModal from "../components/QuestionModal"
+import HostQuestionModal from "../components/HostQuestionModal"
 import type { Category, Question } from "../types"
 import { sampleCategories } from "../systems/Data"
 import { PageCommunicator } from "../systems/PageCommunicator"
@@ -25,12 +25,23 @@ const GameHost = () => {
       )
     }
     setActiveQuestion(null)
+    PageCommunicator.gameHostPage?.postMessage({ type: "closeQuestion", question: activeQuestion }, window.location.origin)
+  }
+
+  const handleCorrect = () => {
+    console.log("Correct answer for question:", activeQuestion)
+    closeModal()
+  }
+
+  const handleIncorrect = () => {
+    console.log("Incorrect answer for question:", activeQuestion)
+    closeModal()
   }
 
   return (
     <div className="app-container">
       <GameBoard categories={categories} onQuestionClick={handleQuestionClick} />
-      <QuestionModal question={activeQuestion} onClose={closeModal} />
+      <HostQuestionModal question={activeQuestion} onCorrect={handleCorrect} onIncorrect={handleIncorrect} />
     </div>
   )
 }

@@ -78,9 +78,18 @@ body {
   justify-content: center;
 }
 
-.modal-content {
+.modal-content-user {
   background: #222;
-  padding: 30px;
-  border-radius: 8px;
+  padding: 4vh;
+  border-radius: 4vh;
   text-align: center;
+  font-size: 8vh;
+}
+
+.modal-content-host {
+  background: #222;
+  padding: 4vh;
+  border-radius: 3vh;
+  text-align: center;
+  font-size: 3vh;
 }
