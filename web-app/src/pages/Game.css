@@ -93,3 +93,12 @@ body {
   text-align: center;
   font-size: 3vh;
 }
+
+.player-score-card {
+  background: #003366;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 0.5rem 0;
+  outline: 1px solid #ffffff55;
+  min-width: 10vw;
+}

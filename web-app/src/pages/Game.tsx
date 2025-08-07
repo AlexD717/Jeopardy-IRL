@@ -5,6 +5,7 @@ import GameBoard from "../components/GameBoard"
 import QuestionModal from "../components/QuestionModal"
 import type { Category, Question } from "../types"
 import { sampleCategories } from "../systems/Data"
+import PlayerScores from "../components/PlayerScores"
 
 const Game = () => {
   const [categories, setCategories] = useState<Category[]>(sampleCategories)
@@ -46,6 +47,7 @@ const Game = () => {
     <div className="app-container">
       <GameBoard categories={categories} onQuestionClick={handleQuestionClick} />
       <QuestionModal question={activeQuestion} />
+      <PlayerScores />
     </div>
   )
 }

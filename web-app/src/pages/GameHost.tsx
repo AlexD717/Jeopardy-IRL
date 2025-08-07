@@ -5,6 +5,7 @@ import HostQuestionModal from "../components/HostQuestionModal"
 import type { Category, Question } from "../types"
 import { sampleCategories } from "../systems/Data"
 import { PageCommunicator } from "../systems/PageCommunicator"
+import PlayerScores from "../components/PlayerScores"
 
 const GameHost = () => {
   const [categories, setCategories] = useState<Category[]>(sampleCategories)
@@ -42,6 +43,7 @@ const GameHost = () => {
     <div className="app-container">
       <GameBoard categories={categories} onQuestionClick={handleQuestionClick} />
       <HostQuestionModal question={activeQuestion} onCorrect={handleCorrect} onIncorrect={handleIncorrect} />
+      <PlayerScores />
     </div>
   )
 }
