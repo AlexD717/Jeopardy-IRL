@@ -48,13 +48,15 @@ const GameHost = () => {
     PageCommunicator.gamePage?.postMessage({ type: "closeQuestion", data: activeQuestion }, window.location.origin)
   }
 
-  const handleCorrect = () => {
+  const handleCorrect = (pressedButton: string) => {
     console.log("Correct answer for question:", activeQuestion)
+    ScoreTracker.getInstance().addScore(pressedButton, activeQuestion?.value ?? 0)
     closeModal()
   }
 
-  const handleIncorrect = () => {
+  const handleIncorrect = (pressedButton: string) => {
     console.log("Incorrect answer for question:", activeQuestion)
+    ScoreTracker.getInstance().addScore(pressedButton, -(activeQuestion?.value ?? 0))
     closeModal()
   }
 

@@ -6,8 +6,8 @@ import { ScoreTracker } from "../systems/ScoreTracker"
 
 interface Props {
   question: Question | null
-  onCorrect: () => void
-  onIncorrect: () => void
+  onCorrect: (pressedButton: string) => void
+  onIncorrect: (pressedButton: string) => void
 }
 
 const QuestionModal: React.FC<Props> = ({ question, onCorrect, onIncorrect }) => {
@@ -44,8 +44,8 @@ const QuestionModal: React.FC<Props> = ({ question, onCorrect, onIncorrect }) =>
         {pressedButton ? (
           <>
             <p>First button pressed: {ScoreTracker.getInstance().getName(pressedButton)}</p>
-            <button onClick={onIncorrect}>Incorrect</button>
-            <button onClick={onCorrect}>Correct</button>
+            <button onClick={() => onIncorrect(pressedButton)}>Incorrect</button>
+            <button onClick={() => onCorrect(pressedButton)}>Correct</button>
           </>
         ) : (
           <p>No button pressed yet</p>

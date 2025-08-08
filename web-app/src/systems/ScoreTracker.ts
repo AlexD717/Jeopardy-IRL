@@ -1,3 +1,5 @@
+import { PageCommunicator } from "./PageCommunicator"
+
 export interface PlayerProperties {
   playerId: string
   score: number
@@ -59,6 +61,7 @@ export class ScoreTracker {
     const player = this.players.find((player) => player.playerId === playerId)
     if (player) {
       player.score += score
+      PageCommunicator.gamePage?.postMessage({ type: "players", data: this.players }, window.location.origin)
     }
   }
 
