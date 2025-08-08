@@ -1,5 +1,6 @@
 import { toast } from "react-toastify"
 import { ScoreTracker } from "./ScoreTracker"
+import { ButtonPress } from "./ButtonPress"
 export class ESPCommunicator {
   private static readonly version = "1"
 
@@ -21,9 +22,13 @@ export class ESPCommunicator {
   private static processESPLine(input: string): void {
     console.log("ESP Line:", input)
     const acknowledge = "Message: Ready "
+    const buttonPress = "Message: Button Press "
     if (input.startsWith(acknowledge)) {
       const espAddress = input.substring(acknowledge.length)
       ScoreTracker.getInstance().addPlayer(espAddress)
+    } else if (input.startsWith(buttonPress)) {
+      const buttonId = input.substring(buttonPress.length)
+      ButtonPress.getInstance().buttonPressed(buttonId)
     }
   }
 

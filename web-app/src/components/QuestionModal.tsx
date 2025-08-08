@@ -11,7 +11,6 @@ const QuestionModal: React.FC<Props> = ({ question }) => {
   return (
     <div className="modal">
       <div className="modal-content-user">
-        <h2>${question.value}</h2>
         <p>{question.question}</p>
       </div>
     </div>

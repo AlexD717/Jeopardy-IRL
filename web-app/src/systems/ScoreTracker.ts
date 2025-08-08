@@ -66,6 +66,10 @@ export class ScoreTracker {
     const player = this.players.find((player) => player.playerId === playerId)
     return player ? player.score : 0
   }
+  public getName(playerId: string): string {
+    const player = this.players.find((player) => player.playerId === playerId)
+    return player ? player.name : "ERROR: Player not found"
+  }
 
   public resetScores(): void {
     this.players = []
