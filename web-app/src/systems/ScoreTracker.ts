@@ -50,6 +50,11 @@ export class ScoreTracker {
     return this.players
   }
 
+  public setPlayerData(data: PlayerProperties[]): void {
+    this.players = data
+    this.eventTarget.dispatchEvent(new Event("playerAdded"))
+  }
+
   public addScore(playerId: string, score: number): void {
     const player = this.players.find((player) => player.playerId === playerId)
     if (player) {
