@@ -5,8 +5,10 @@ const Setup = () => {
   const navigate = useNavigate()
 
   async function connectMasterESP() {
-    await ESPCommunicator.getInstance().connectToESP()
-    navigate("/search")
+    const connected = await ESPCommunicator.getInstance().connectToESP()
+    if (connected) {
+      navigate("/search")
+    }
   }
 
   return (

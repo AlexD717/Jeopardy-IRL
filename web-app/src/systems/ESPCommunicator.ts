@@ -105,12 +105,12 @@ export class ESPCommunicator {
     }
   }
 
-  async connectToESP(): Promise<void> {
+  async connectToESP(): Promise<boolean> {
     console.log("Connecting to MASTER ESP...")
     if (!("serial" in navigator)) {
       console.error("Web Serial API not supported.")
       alert("Web Serial API not supported in this browser. Make sure that you are using the latest version of Chrome")
-      return
+      return false
     }
 
     let connectingDevice = null
@@ -147,7 +147,7 @@ export class ESPCommunicator {
         theme: "dark",
       })
       this.esp = null
-      return
+      return false
     }
 
     this.esp = connectingDevice
@@ -157,5 +157,6 @@ export class ESPCommunicator {
       autoClose: 5000,
       theme: "dark",
     })
+    return true
   }
 }
