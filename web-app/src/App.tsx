@@ -14,11 +14,9 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Setup />} />
-        <Route path="/Jeopardy-IRL" element={<Setup />} />
         <Route path="/setup" element={<Setup />} />
         <Route path="/search" element={<Search />} />
         <Route path="/game" element={<Game />} />
-        <Route path="/Jeopardy-IRL/game" element={<Game />} />
         <Route path="/gamehost" element={<GameHost />} />
       </Routes>
       <ToastContainer />
