@@ -4,7 +4,7 @@ export class PageCommunicator {
   public static gamePage: WindowProxy | null = null
 
   public static OpenGamePage() {
-    const gameURL = import.meta.env.MODE === "production" ? "/Jeopardy-IRL/game" : "/game"
+    const gameURL = import.meta.env.MODE === "production" ? "./game" : "/game"
     PageCommunicator.gamePage = window.open(gameURL, "_blank")
 
     window.addEventListener("message", (event) => {
