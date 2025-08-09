@@ -1,3 +1,5 @@
+import { PageCommunicator } from "./PageCommunicator"
+
 export interface PlayerProperties {
   playerId: string
   score: number
@@ -50,16 +52,26 @@ export class ScoreTracker {
     return this.players
   }
 
+  public setPlayerData(data: PlayerProperties[]): void {
+    this.players = data
+    this.eventTarget.dispatchEvent(new Event("playerAdded"))
+  }
+
   public addScore(playerId: string, score: number): void {
     const player = this.players.find((player) => player.playerId === playerId)
     if (player) {
       player.score += score
+      PageCommunicator.gamePage?.postMessage({ type: "players", data: this.players }, window.location.origin)
     }
   }
 
   public getScore(playerId: string): number {
     const player = this.players.find((player) => player.playerId === playerId)
     return player ? player.score : 0
+  }
+  public getName(playerId: string): string {
+    const player = this.players.find((player) => player.playerId === playerId)
+    return player ? player.name : "ERROR: Player not found"
   }
 
   public resetScores(): void {

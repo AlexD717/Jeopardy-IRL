@@ -1,5 +1,6 @@
 import { toast } from "react-toastify"
 import { ScoreTracker } from "./ScoreTracker"
+import { ButtonPress } from "./ButtonPress"
 export class ESPCommunicator {
   private static readonly version = "1"
 
@@ -21,9 +22,13 @@ export class ESPCommunicator {
   private static processESPLine(input: string): void {
     console.log("ESP Line:", input)
     const acknowledge = "Message: Ready "
+    const buttonPress = "Message: Button Press "
     if (input.startsWith(acknowledge)) {
       const espAddress = input.substring(acknowledge.length)
       ScoreTracker.getInstance().addPlayer(espAddress)
+    } else if (input.startsWith(buttonPress)) {
+      const buttonId = input.substring(buttonPress.length)
+      ButtonPress.getInstance().buttonPressed(buttonId)
     }
   }
 
@@ -105,12 +110,12 @@ export class ESPCommunicator {
     }
   }
 
-  async connectToESP(): Promise<void> {
+  async connectToESP(): Promise<boolean> {
     console.log("Connecting to MASTER ESP...")
     if (!("serial" in navigator)) {
       console.error("Web Serial API not supported.")
       alert("Web Serial API not supported in this browser. Make sure that you are using the latest version of Chrome")
-      return
+      return false
     }
 
     let connectingDevice = null
@@ -147,7 +152,7 @@ export class ESPCommunicator {
         theme: "dark",
       })
       this.esp = null
-      return
+      return false
     }
 
     this.esp = connectingDevice
@@ -157,5 +162,6 @@ export class ESPCommunicator {
       autoClose: 5000,
       theme: "dark",
     })
+    return true
   }
 }
