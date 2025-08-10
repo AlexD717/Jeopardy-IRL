@@ -9,8 +9,8 @@ typedef struct Message {
   char text[32];
 } Message;
 
-// MAC address of the master CC:7B:5C:F6:58:14
-uint8_t masterMAC[] = {0xCC, 0x7B, 0x5C, 0xF6, 0x58, 0x14}; // TODO change to your master MAC address
+// MAC address of the master FC:B4:67:F2:AB:E0
+uint8_t masterMAC[] = {0xFC, 0xB4, 0x67, 0xF2, 0xAB, 0xE0}; // TODO change to your master MAC address
 
 void OnDataRecv(const uint8_t *mac, const uint8_t *incomingData, int len) {
   Message msg;

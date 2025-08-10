@@ -3,6 +3,8 @@ import { PageCommunicator } from "./PageCommunicator"
 export class ButtonPress {
   private static instance: ButtonPress | null = null
   public firstButtonPressed: string | null = null
+  public allButtonsPressed: Set<string> = new Set()
+  public lastButtonPressed: string | null = null
   private eventTarget: EventTarget
 
   private constructor() {
@@ -17,13 +19,13 @@ export class ButtonPress {
   }
 
   public buttonPressed(buttonId: string): void {
-    if (this.firstButtonPressed) {
-      console.log("Button already pressed:", this.firstButtonPressed)
-      return
+    if (!this.firstButtonPressed) {
+      this.firstButtonPressed = buttonId
+      console.log("First button pressed:", buttonId)
     }
 
-    this.firstButtonPressed = buttonId
-    console.log("First button pressed:", buttonId)
+    this.allButtonsPressed.add(buttonId)
+    this.lastButtonPressed = buttonId
 
     this.eventTarget.dispatchEvent(new Event("buttonPressedUpdated"))
     PageCommunicator.gamePage?.postMessage({ type: "buttonPressed", data: buttonId }, window.location.origin)
@@ -31,6 +33,8 @@ export class ButtonPress {
 
   public reset(): void {
     this.firstButtonPressed = null
+    this.allButtonsPressed.clear()
+    this.lastButtonPressed = null
     console.log("Button press reset")
     this.eventTarget.dispatchEvent(new Event("buttonPressedUpdated"))
     PageCommunicator.gamePage?.postMessage({ type: "resetButtonPress", data: null }, window.location.origin)
