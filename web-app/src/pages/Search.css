@@ -11,4 +11,11 @@
   margin-bottom: 1rem;
   margin-right: 1rem;
   background-color: #727272;
+  transition: background-color 0.1s ease, box-shadow 0.1s ease;
+}
+
+.player-customization-card.button-pressed {
+  background-color: #4caf50;
+  box-shadow: 0 0 15px rgba(76, 175, 80, 0.6);
+  border-color: #45a049;
 }
