@@ -48,7 +48,7 @@
 }
 
 .continue-button:disabled {
-  background-color: #757575;
+  background-color: #424352;
   cursor: not-allowed;
 }
 

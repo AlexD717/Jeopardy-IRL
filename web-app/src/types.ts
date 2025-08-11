@@ -1,6 +1,5 @@
 export interface Question {
   id: string
-  category: string
   value: number
   question: string
   answer: string
