@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom"
 import { ScoreTracker } from "../systems/ScoreTracker"
 import type { PlayerProperties } from "../systems/ScoreTracker"
 import "./Search.css"
-import { ESPCommunicator } from "../systems/ESPCommunicator"
-import { PageCommunicator } from "../systems/PageCommunicator"
 import { ButtonPress } from "../systems/ButtonPress"
 
 const PlayerCustomizationCard = ({ playerId, name, isPressed }: PlayerProperties & { isPressed: boolean }) => {
@@ -97,9 +95,7 @@ const Search = () => {
   }, [])
 
   function startGame() {
-    ESPCommunicator.getInstance().sendMessage("Game Start")
-    PageCommunicator.OpenGamePage()
-    navigate("/gamehost")
+    navigate("/categories")
   }
 
   return (
