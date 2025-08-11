@@ -6,6 +6,7 @@ import Setup from "./pages/Setup"
 import Search from "./pages/Search"
 import Game from "./pages/Game"
 import GameHost from "./pages/GameHost"
+import CategorySelection from "./pages/CategorySelection"
 
 function App() {
   useGameLoop()
@@ -18,6 +19,7 @@ function App() {
         <Route path="/search" element={<Search />} />
         <Route path="/game" element={<Game />} />
         <Route path="/gamehost" element={<GameHost />} />
+        <Route path="/categories" element={<CategorySelection />} />
       </Routes>
       <ToastContainer />
     </div>

@@ -42,6 +42,12 @@ const Game = () => {
         setPlayers(data)
         return
       }
+
+      if (type === "categories" && data) {
+        console.log("Received categories:", data)
+        setCategories(data)
+        return
+      }
     }
 
     window.addEventListener("message", handleMessage)

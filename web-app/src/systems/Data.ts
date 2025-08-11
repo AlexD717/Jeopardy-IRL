@@ -51,4 +51,24 @@ export const sampleCategories: Category[] = [
       { id: "mov-500", category: "Movies", value: 500, question: 'Which director is known for the "Inception" and "Interstellar"?', answer: "Christopher Nolan", asked: false },
     ],
   },
+  {
+    name: "Sports",
+    questions: [
+      { id: "spo-100", category: "Sports", value: 100, question: "How many players are on a basketball team?", answer: "5", asked: false },
+      { id: "spo-200", category: "Sports", value: 200, question: "What sport is known as the 'king of sports'?", answer: "Soccer", asked: false },
+      { id: "spo-300", category: "Sports", value: 300, question: "What is the national sport of Japan?", answer: "Sumo", asked: false },
+      { id: "spo-400", category: "Sports", value: 400, question: "Which country has won the most World Cups?", answer: "Brazil", asked: false },
+      { id: "spo-500", category: "Sports", value: 500, question: "What is the maximum score in a single frame of bowling?", answer: "30", asked: false },
+    ],
+  },
+  {
+    name: "Music",
+    questions: [
+      { id: "mus-100", category: "Music", value: 100, question: "Who is known as the King of Pop?", answer: "Michael Jackson", asked: false },
+      { id: "mus-200", category: "Music", value: 200, question: "What is the highest vocal range for a male singer?", answer: "Countertenor", asked: false },
+      { id: "mus-300", category: "Music", value: 300, question: "Which composer became deaf later in life?", answer: "Beethoven", asked: false },
+      { id: "mus-400", category: "Music", value: 400, question: "What is the name of the Beatles' first album?", answer: "Please Please Me", asked: false },
+      { id: "mus-500", category: "Music", value: 500, question: "Who is the lead singer of U2?", answer: "Bono", asked: false },
+    ],
+  },
 ]

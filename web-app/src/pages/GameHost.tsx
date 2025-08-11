@@ -7,11 +7,27 @@ import { sampleCategories } from "../systems/Data"
 import { PageCommunicator } from "../systems/PageCommunicator"
 import PlayerScores from "../components/PlayerScores"
 import { ScoreTracker, type PlayerProperties } from "../systems/ScoreTracker"
+import { useNavigate, useLocation } from "react-router-dom"
 
 const GameHost = () => {
   const [categories, setCategories] = useState<Category[]>(sampleCategories)
   const [activeQuestion, setActiveQuestion] = useState<Question | null>(null)
   const [players] = useState<PlayerProperties[]>(ScoreTracker.getInstance().getPlayerData())
+  const navigate = useNavigate()
+  const location = useLocation()
+  const passedCategories = location.state?.categories
+
+  React.useEffect(() => {
+    if (passedCategories && passedCategories.length > 0) {
+      setCategories(passedCategories)
+    }
+  }, [passedCategories])
+
+  React.useEffect(() => {
+    if (!categories || categories.length === 0) {
+      navigate("/categories")
+    }
+  }, [categories, navigate])
 
   React.useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
