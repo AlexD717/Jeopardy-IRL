@@ -11,6 +11,8 @@ You also need a device running the web app on Chrome or a different browser that
 
 ### Setting up the ESPs
 
+If you don't already have the esp drivers, make sure to go in and install them. [Sample Tutorial](https://randomnerdtutorials.com/install-esp32-esp8266-usb-drivers-cp210x-windows/)
+
 The first step is to identify the Mac Address of each ESP. To do this run the script in the MacAddressESP folder, and observe the serial output. You should get something like CA:7B:FC:F6:72:29.
 Choose one ESP to be the MasterESP and update the FollowerESP script to have the MasterESP Mac Address (Line 13, TODO statement). Then update the MasterESP code to have the Mac Addresses of all other ESPs (Line 15, TODO statement).
 
