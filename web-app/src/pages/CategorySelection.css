@@ -3,8 +3,37 @@
   padding: 20px;
 }
 
+.upload-section {
+  margin: 20px 0;
+}
+
+.upload-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #28a79f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.upload-button:hover {
+  background-color: #218488;
+}
+
 .categories {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.categories-container {
+  display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;

@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Example Category",
+    "questions": [
+      {
+        "value": 100,
+        "question": "What is the first question?",
+        "answer": "The first answer"
+      },
+      {
+        "value": 200,
+        "question": "What is the second question?",
+        "answer": "The second answer"
+      },
+      {
+        "value": 300,
+        "answer": "The third answer",
+        "question": "What is the third question?"
+      },
+      {
+        "value": 400,
+        "question": "What is the fourth question?",
+        "answer": "The fourth answer"
+      },
+      {
+        "value": 500,
+        "question": "What is the fifth question?",
+        "answer": "The fifth answer"
+      }
+    ]
+  },
+  {
+    "name": "Custom Category 2",
+    "questions": [
+      {
+        "value": 100,
+        "question": "Another first question?",
+        "answer": "Another first answer"
+      },
+      {
+        "value": 200,
+        "question": "Another second question?",
+        "answer": "Another second answer"
+      },
+      {
+        "value": 300,
+        "question": "Another third question?",
+        "answer": "Another third answer"
+      },
+      {
+        "value": 400,
+        "question": "Another fourth question?",
+        "answer": "Another fourth answer"
+      },
+      {
+        "value": 500,
+        "question": "Another fifth question?",
+        "answer": "Another fifth answer"
+      }
+    ]
+  }
+]
