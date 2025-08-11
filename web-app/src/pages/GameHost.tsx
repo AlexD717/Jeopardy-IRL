@@ -76,10 +76,15 @@ const GameHost = () => {
     closeModal()
   }
 
+  const handleNoAnswer = () => {
+    console.log("No answer provided for question:", activeQuestion)
+    closeModal()
+  }
+
   return (
     <div className="app-container">
       <GameBoard categories={categories} onQuestionClick={handleQuestionClick} />
-      <HostQuestionModal question={activeQuestion} onCorrect={handleCorrect} onIncorrect={handleIncorrect} />
+      <HostQuestionModal question={activeQuestion} onCorrect={handleCorrect} onIncorrect={handleIncorrect} handleNoAnswer={handleNoAnswer} />
       <PlayerScores players={players} />
       <p style={{ textAlign: "left", margin: "0.5rem 0.5rem" }}>For Game Host Eyes Only</p>
     </div>

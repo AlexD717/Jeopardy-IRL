@@ -14,7 +14,7 @@ const QuestionModal: React.FC<Props> = ({ question }) => {
       if (event.origin !== window.location.origin) return
       const { type, data } = event.data
 
-      if (type === "buttonPressed" && data) {
+      if (type === "firstButtonPressed" && data) {
         setPressedButton(data)
         return
       }

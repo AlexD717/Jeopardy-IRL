@@ -8,9 +8,10 @@ interface Props {
   question: Question | null
   onCorrect: (pressedButton: string) => void
   onIncorrect: (pressedButton: string) => void
+  handleNoAnswer: () => void
 }
 
-const QuestionModal: React.FC<Props> = ({ question, onCorrect, onIncorrect }) => {
+const QuestionModal: React.FC<Props> = ({ question, onCorrect, onIncorrect, handleNoAnswer }) => {
   const [pressedButton, setPressedButton] = React.useState<string | null>(null)
 
   useEffect(() => {
@@ -48,7 +49,10 @@ const QuestionModal: React.FC<Props> = ({ question, onCorrect, onIncorrect }) =>
             <button onClick={() => onCorrect(pressedButton)}>Correct</button>
           </>
         ) : (
-          <p>No button pressed yet</p>
+          <>
+            <p>No button pressed yet</p>
+            <button onClick={() => handleNoAnswer()}>No Answers</button>
+          </>
         )}
       </div>
     </div>

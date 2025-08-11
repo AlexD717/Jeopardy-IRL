@@ -22,6 +22,7 @@ export class ButtonPress {
     if (!this.firstButtonPressed) {
       this.firstButtonPressed = buttonId
       console.log("First button pressed:", buttonId)
+      PageCommunicator.gamePage?.postMessage({ type: "firstButtonPressed", data: buttonId }, window.location.origin)
     }
 
     this.allButtonsPressed.add(buttonId)
