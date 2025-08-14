@@ -15,6 +15,13 @@ const Setup = () => {
     <div className="setup-container">
       <h1>Setup</h1>
       <button onClick={connectMasterESP}>Connect MasterESP</button>
+      <button
+        onClick={() => {
+          open("https://github.com/AlexD717/Jeopardy-IRL/releases/tag/v1.0.0")
+        }}
+      >
+        Demo Video
+      </button>
     </div>
   )
 }
