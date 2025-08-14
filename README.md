@@ -24,3 +24,7 @@ The last step is to plug in the MasterESP with a cable that supports data transf
 
 Navigate to https://alexd717.github.io/Jeopardy-IRL/, and press the Connect MasterESP button, select the port of the MasterESP and the app will guide you through the rest of the process.
 At a certain points a second tab will automatically open. This is the Game tab, and clicking anything on there will do nothing. To select the questions that will appear, make sure to click on the GameHost tab (will have a For Host Eyes Only message at the bottom).
+
+## Demo
+
+[![Demo](assets/demo-thumbnail.png)](assets/demo.mp4)
