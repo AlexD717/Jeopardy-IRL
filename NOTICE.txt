@@ -1,0 +1,9 @@
+This product bundles the following third-party asset:
+
+* web-app/assets/sounds/correct
+  Licensed under Pixabay License
+  https://pixabay.com/service/license-summary/
+
+* web-app/assets/sounds/incorrect
+  Licensed under Pixabay License
+  https://pixabay.com/service/license-summary/

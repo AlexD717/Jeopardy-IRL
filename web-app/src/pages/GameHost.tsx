@@ -8,6 +8,7 @@ import { PageCommunicator } from "../systems/PageCommunicator"
 import PlayerScores from "../components/PlayerScores"
 import { ScoreTracker, type PlayerProperties } from "../systems/ScoreTracker"
 import { useNavigate, useLocation } from "react-router-dom"
+import { SoundPlayer } from "../systems/SoundPlayer"
 
 const GameHost = () => {
   const [categories, setCategories] = useState<Category[]>(sampleCategories)
@@ -66,12 +67,14 @@ const GameHost = () => {
 
   const handleCorrect = (pressedButton: string) => {
     console.log("Correct answer for question:", activeQuestion)
+    SoundPlayer.playCorrectSound()
     ScoreTracker.getInstance().addScore(pressedButton, activeQuestion?.value ?? 0)
     closeModal()
   }
 
   const handleIncorrect = (pressedButton: string) => {
     console.log("Incorrect answer for question:", activeQuestion)
+    SoundPlayer.playIncorrectSound()
     ScoreTracker.getInstance().addScore(pressedButton, -(activeQuestion?.value ?? 0))
     closeModal()
   }
